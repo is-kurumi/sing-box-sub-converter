@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="https://raw.githubusercontent.com/Toperlock/sing-box-subscribe/main/public/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/Toperlock/sing-box-subscribe@main/public/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="sing-box 订阅转换">
     <title>生成sing-box配置</title>
@@ -125,12 +125,12 @@
         // 初始化时设置背景和布局
         function initialize() {
             if (detectMobile()) {
-                document.body.style.backgroundImage = "url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images&method=mobile')";
+                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/Mobile.webp')";
                 document.querySelector('.container').style.flexDirection = 'column';
                 document.querySelector('.right-box').style.width = '100%';
                 document.querySelector('.title').style.textAlign = 'center'; // 居中对齐
             } else {
-                document.body.style.backgroundImage = "url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images')";
+                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/PC.webp')";
             }
         }
 

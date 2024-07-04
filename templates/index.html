@@ -98,13 +98,15 @@
             </form>
             <div class="form-container" style="display: flex; flex-direction: column; align-items: flex-start;">
                 <form method="POST" action="/generate_config" style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <label for="template_index">Select Template:</label>
-                    <select id="template_index" name="template_index">
-                        {% for option in template_options %}
-                        <option value="{{ loop.index - 1 }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                    <input type="submit" value="Select and Generate">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <label for="template_index">Select Template:</label>
+                        <select id="template_index" name="template_index" style="margin-left: 10px;">
+                            {% for option in template_options %}
+                            <option value="{{ loop.index - 1 }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="Select and Generate" style="margin-top: 10px;">
                 </form>
             </div>
         </div>

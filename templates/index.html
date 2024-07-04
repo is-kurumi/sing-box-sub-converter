@@ -68,13 +68,16 @@
     <script>
         function toggleBackgroundColor() {
             var body = document.body;
+            var title = document.querySelector('.title');
             var currentColor = window.getComputedStyle(body).backgroundColor;
             if (currentColor === 'rgb(242, 242, 242)') {
                 body.style.backgroundColor = '#333';
                 body.style.color = '#fff';
+                title.style.color = '#fff'; // 改变标题颜色
             } else {
                 body.style.backgroundColor = '#f2f2f2';
                 body.style.color = '#000';
+                title.style.color = '#333'; // 恢复标题颜色
             }
         }
     </script>
@@ -100,7 +103,7 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
-            <button onclick="toggleBackgroundColor()">设定夜间模式</button>
+            <button onclick="toggleBackgroundColor()">Toggle Background Color</button>
         </div>
     </div>
 </body>

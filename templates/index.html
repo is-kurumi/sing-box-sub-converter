@@ -21,8 +21,9 @@
         }
         .title {
             font-size: 3em;
-            text-align: center;
+            text-align: right;
             color: #333;
+            margin-top: 0;
         }
         .title a {
             color: #ffc0cb;
@@ -57,9 +58,6 @@
                 flex-direction: column; /* 垂直排列 */
                 align-items: center; /* 垂直居中对齐 */
             }
-            .title {
-                margin-bottom: 20px; /* 标题与编辑框之间的间距 */
-            }
             .right-box {
                 width: 100%; /* 平分屏幕宽度 */
             }
@@ -87,10 +85,10 @@
 </head>
 <body>
     <div class="overlay"></div>
-    <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
     <div class="container">
         <div class="right-box">
             <h1>Edit TEMP_JSON_DATA</h1>
+            <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
             <form id="temp-json-form" method="POST" action="/edit_temp_json">
                 <textarea name="temp_json_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ temp_json_data | default('') }}</textarea>
                 <br>

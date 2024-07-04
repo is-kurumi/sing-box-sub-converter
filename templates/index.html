@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="sing-box 订阅转换">
     <title>生成sing-box配置</title>
+    <!-- CSP 策略 -->
     <style>
         body {
             margin: 0;
@@ -64,6 +65,10 @@
         select {
             padding: 10px; /* 增加选择框的触摸目标尺寸 */
         }
+        label {
+            display: block; /* 标签块级显示 */
+            margin-bottom: 5px; /* 标签和控件之间的间距 */
+        }
     </style>
 </head>
 <body>
@@ -117,7 +122,7 @@
                 document.querySelector('.right-box').style.width = '100%';
                 document.querySelector('.title').style.textAlign = 'center'; // 居中对齐
             } else {
-                document.body.style.backgroundImage = "url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images')";
+                document.body.style.backgroundImage = "url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images')";
             }
         }
 

@@ -12,7 +12,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background: url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images') no-repeat center center fixed;
+            background-size: cover;
+            transition: background-color 0.5s, color 0.5s; /* 添加过渡效果 */
+            position: relative;
         }
         .title {
             font-size: 3em;
@@ -26,20 +29,6 @@
         .title a:hover {
             text-decoration: underline;
         }
-    </style>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column; /* 垂直排列 */
-            align-items: center; /* 水平居中对齐 */
-            max-width: 100%; /* 调整内容最大宽度 */
-            justify-content: center;
-            height: 100vh; /* 使内容在垂直方向上居中 */
-            margin: 0; /* 去掉默认的页面边距 */
-            font-family: Arial, sans-serif; /* 可选的字体 */
-            background-color: #f2f2f2;
-            transition: background-color 0.5s, color 0.5s; /* 添加过渡效果 */
-        }
         .container {
             display: flex;
             flex-direction: row; /* 水平排列 */
@@ -50,6 +39,8 @@
             padding: 20px;
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
+            background: rgba(255, 255, 255, 0.8); /* 增加一个白色半透明背景以提高可读性 */
+            border-radius: 10px; /* 可选：增加边框圆角 */
         }
         @media screen and (max-width: 768px) {
             .container {
@@ -63,6 +54,22 @@
                 margin-left: 20px; /* 与左边隔开20px，根据需要调整距离 */
                 margin-right: 20px; /* 与右边隔开20px，根据需要调整距离 */
             }
+        }
+        /* 夜间模式遮罩 */
+        .dark-mode-overlay {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩 */
+            pointer-events: none; /* 使遮罩不影响鼠标事件 */
+            transition: opacity 0.5s; /* 添加过渡效果 */
+            opacity: 0;
+        }
+        .dark-mode {
+            opacity: 1;
         }
     </style>
     <script>
@@ -84,14 +91,17 @@
         function applyDarkMode(isDarkMode) {
             var body = document.body;
             var title = document.querySelector('.title');
+            var overlay = document.querySelector('.dark-mode-overlay');
             if (isDarkMode) {
                 body.style.backgroundColor = '#333';
                 body.style.color = '#fff';
                 title.style.color = '#fff';
+                overlay.classList.add('dark-mode');
             } else {
                 body.style.backgroundColor = '#f2f2f2';
                 body.style.color = '#000';
                 title.style.color = '#333';
+                overlay.classList.remove('dark-mode');
             }
         }
 
@@ -106,6 +116,7 @@
     </script>
 </head>
 <body>
+    <div class="dark-mode-overlay"></div>
     <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
     <div class="container">
         <div class="right-box">
@@ -126,7 +137,7 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
-            <button onclick="toggleBackgroundColor()">Switch Dark Mode</button>
+            <button onclick="toggleBackgroundColor()">Toggle Background Color</button>
         </div>
     </div>
 </body>

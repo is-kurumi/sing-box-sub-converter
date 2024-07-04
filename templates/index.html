@@ -80,6 +80,29 @@
                 title.style.color = '#333'; // 恢复标题颜色
             }
         }
+
+        function applyDarkMode(isDarkMode) {
+            var body = document.body;
+            var title = document.querySelector('.title');
+            if (isDarkMode) {
+                body.style.backgroundColor = '#333';
+                body.style.color = '#fff';
+                title.style.color = '#fff';
+            } else {
+                body.style.backgroundColor = '#f2f2f2';
+                body.style.color = '#000';
+                title.style.color = '#333';
+            }
+        }
+
+        window.addEventListener('load', function() {
+            var darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            applyDarkMode(darkModeMediaQuery.matches); // 应用当前模式
+
+            darkModeMediaQuery.addEventListener('change', function(event) {
+                applyDarkMode(event.matches); // 当系统颜色模式变化时，应用新的模式
+            });
+        });
     </script>
 </head>
 <body>
@@ -103,7 +126,7 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
-            <button onclick="toggleBackgroundColor()">Toggle Background Color</button>
+            <button onclick="toggleBackgroundColor()">Switch Dark Mode</button>
         </div>
     </div>
 </body>

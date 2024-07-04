@@ -17,9 +17,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-        }
-        .dark-mode {
-            background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩 */
+            color: #333;
         }
         .title {
             font-size: 3em;
@@ -37,6 +35,7 @@
             display: flex;
             flex-direction: row; /* 水平排列 */
             align-items: center; /* 水平居中对齐 */
+            z-index: 2;
         }
         .right-box {
             flex: 2;
@@ -61,14 +60,23 @@
             }
         }
         /* 夜间模式下的样式 */
+        .dark-mode .overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
         .dark-mode .title,
         .dark-mode .right-box {
             color: #fff;
-            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
     <div class="container">
         <div class="right-box">

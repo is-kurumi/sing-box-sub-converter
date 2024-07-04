@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
-            background-image: url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images');
+            background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -47,8 +47,18 @@
         }
         /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
         @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images&method=mobile');
+            }
             .container {
                 flex-direction: column; /* 垂直排列 */
+                align-items: center; /* 垂直居中对齐 */
+            }
+            .title {
+                margin-bottom: 20px; /* 标题与编辑框之间的间距 */
             }
             .right-box {
                 width: 100%; /* 平分屏幕宽度 */

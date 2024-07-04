@@ -39,8 +39,6 @@
             padding: 20px;
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
-            background: rgba(255, 255, 255, 0.8); /* 增加一个白色半透明背景以提高可读性 */
-            border-radius: 10px; /* 可选：增加边框圆角 */
         }
         @media screen and (max-width: 768px) {
             .container {
@@ -68,40 +66,21 @@
             transition: opacity 0.5s; /* 添加过渡效果 */
             opacity: 0;
         }
-        .dark-mode {
+        .dark-mode .dark-mode-overlay {
             opacity: 1;
         }
     </style>
     <script>
-        function toggleBackgroundColor() {
-            var body = document.body;
-            var title = document.querySelector('.title');
-            var currentColor = window.getComputedStyle(body).backgroundColor;
-            if (currentColor === 'rgb(242, 242, 242)') {
-                body.style.backgroundColor = '#333';
-                body.style.color = '#fff';
-                title.style.color = '#fff'; // 改变标题颜色
-            } else {
-                body.style.backgroundColor = '#f2f2f2';
-                body.style.color = '#000';
-                title.style.color = '#333'; // 恢复标题颜色
-            }
-        }
-
         function applyDarkMode(isDarkMode) {
             var body = document.body;
             var title = document.querySelector('.title');
             var overlay = document.querySelector('.dark-mode-overlay');
             if (isDarkMode) {
-                body.style.backgroundColor = '#333';
-                body.style.color = '#fff';
+                body.classList.add('dark-mode');
                 title.style.color = '#fff';
-                overlay.classList.add('dark-mode');
             } else {
-                body.style.backgroundColor = '#f2f2f2';
-                body.style.color = '#000';
+                body.classList.remove('dark-mode');
                 title.style.color = '#333';
-                overlay.classList.remove('dark-mode');
             }
         }
 
@@ -137,7 +116,7 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
-            <button onclick="toggleBackgroundColor()">Toggle Background Color</button>
+            <button onclick="toggleBackgroundColor()">Switch Dark Mode</button>
         </div>
     </div>
 </body>

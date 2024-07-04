@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
-    <html lang="zh-CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="sing-box 订阅转换">
     <link rel="icon" href="https://raw.githubusercontent.com/Toperlock/sing-box-subscribe/main/public/favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 添加此行 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="sing-box 订阅转换">
     <title>生成sing-box配置</title>
     <style>
         body {
@@ -63,6 +62,17 @@
         .dark-mode .right-box {
             color: #fff;
         }
+        button {
+            padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
+            margin: 5px; /* 增加按钮的间距 */
+        }
+        input[type="submit"] {
+            padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
+            margin: 5px; /* 增加按钮的间距 */
+        }
+        select {
+            padding: 10px; /* 增加选择框的触摸目标尺寸 */
+        }
     </style>
 </head>
 <body>
@@ -72,15 +82,17 @@
             <h1>Edit TEMP_JSON_DATA</h1>
             <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
             <form id="temp-json-form" method="POST" action="/edit_temp_json">
-                <textarea name="temp_json_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ temp_json_data | default('') }}</textarea>
+                <label for="temp-json-data">JSON Data:</label>
+                <textarea id="temp-json-data" name="temp_json_data" rows="10" cols="40">{{ temp_json_data | default('') }}</textarea>
                 <br>
-                <input type="submit" value="save">
+                <input type="submit" value="Save">
             </form>
             <button onclick="toggleLanguage()">Switch Language</button>
             <button id="switch-dark-mode" onclick="toggleDarkMode()">Switch Dark Mode</button>
             <div class="form-container" style="display: flex; align-items: center;">
                 <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
-                    <select name="template_index">
+                    <label for="template_index">Select Template:</label>
+                    <select id="template_index" name="template_index">
                         {% for option in template_options %}
                         <option value="{{ loop.index - 1 }}">{{ option }}</option>
                         {% endfor %}

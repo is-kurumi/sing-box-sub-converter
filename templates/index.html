@@ -27,38 +27,30 @@
             text-decoration: underline;
         }
     </style>
-    <title>Title</title>
     <style>
         body {
             display: flex;
             flex-direction: column; /* 垂直排列 */
             align-items: center; /* 水平居中对齐 */
             max-width: 100%; /* 调整内容最大宽度 */
-            /* transform: scale(1.9);  将内容放大190% */
             justify-content: center;
             height: 100vh; /* 使内容在垂直方向上居中 */
             margin: 0; /* 去掉默认的页面边距 */
             font-family: Arial, sans-serif; /* 可选的字体 */
             background-color: #f2f2f2;
+            transition: background-color 0.5s, color 0.5s; /* 添加过渡效果 */
         }
         .container {
             display: flex;
             flex-direction: row; /* 水平排列 */
             align-items: center; /* 水平居中对齐 */
         }
-        /*
-        .left-box {
-            flex: 1;
-            padding: 10px;
-        }
-        */
         .right-box {
             flex: 2;
             padding: 20px;
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
         }
-        /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
         @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column; /* 垂直排列 */
@@ -73,19 +65,23 @@
             }
         }
     </style>
+    <script>
+        function toggleBackgroundColor() {
+            var body = document.body;
+            var currentColor = window.getComputedStyle(body).backgroundColor;
+            if (currentColor === 'rgb(242, 242, 242)') {
+                body.style.backgroundColor = '#333';
+                body.style.color = '#fff';
+            } else {
+                body.style.backgroundColor = '#f2f2f2';
+                body.style.color = '#000';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
     <div class="container">
-        <!--
-        <div class="left-box">
-            <h1>Providers JSON 模板</h1>
-            <form id="providers-form" method="POST" action="/update_providers">
-                <textarea name="providers_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ providers_data | safe }}</textarea>
-                <br>
-            </form>
-        </div>
-        -->
         <div class="right-box">
             <h1>Edit TEMP_JSON_DATA</h1>
             <form id="temp-json-form" method="POST" action="/edit_temp_json">
@@ -104,6 +100,8 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
+            <button onclick="toggleBackgroundColor()">设定夜间模式</button>
         </div>
+    </div>
 </body>
 </html>

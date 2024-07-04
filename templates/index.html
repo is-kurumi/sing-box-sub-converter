@@ -13,14 +13,14 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
-            background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             color: #333;
+            transition: background-image 0.5s ease;
         }
         .title {
-            font-size: 2em; /* 减小标题字体大小 */
+            font-size: 1em; /* 减小标题字体大小 */
             text-align: right;
             color: #333;
             margin-top: 0;
@@ -45,27 +45,6 @@
             box-sizing: border-box; /* 让padding不影响最大宽度 */
             background-color: rgba(255, 255, 255, 0.8); /* 保证编辑框可读性 */
             z-index: 2; /* 使编辑框在遮罩之上 */
-        }
-        /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
-        @media screen and (max-width: 768px) {
-            body {
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images&method=mobile');
-            }
-            .container {
-                flex-direction: column; /* 垂直排列 */
-                align-items: center; /* 垂直居中对齐 */
-            }
-            .right-box {
-                width: 100%; /* 平分屏幕宽度 */
-            }
-            .config-content {
-                white-space: normal; /* 在小屏幕下允许内容换行 */
-                margin-left: 20px; /* 与左边隔开20px，根据需要调整距离 */
-                margin-right: 20px; /* 与右边隔开20px，根据需要调整距离 */
-            }
         }
         /* 夜间模式下的样式 */
         .dark-mode .overlay {
@@ -121,6 +100,25 @@
             document.body.classList.toggle('dark-mode');
         }
 
+        // 根据 User-Agent 检测移动设备
+        function detectMobile() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
+            return isMobile;
+        }
+
+        // 初始化时设置背景和布局
+        function initialize() {
+            if (detectMobile()) {
+                document.body.style.backgroundImage = "url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images&method=mobile')";
+                document.querySelector('.container').style.flexDirection = 'column';
+                document.querySelector('.right-box').style.width = '100%';
+                document.querySelector('.title').style.textAlign = 'center'; // 居中对齐
+            } else {
+                document.body.style.backgroundImage = "url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images')";
+            }
+        }
+
         // 检测系统夜间模式
         const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         darkModeMediaQuery.addListener((e) => {
@@ -129,6 +127,9 @@
 
         // 初始化时根据系统设置应用夜间模式
         applyDarkMode(darkModeMediaQuery.matches);
+        
+        // 初始化设置
+        initialize();
     </script>
 </body>
 </html>

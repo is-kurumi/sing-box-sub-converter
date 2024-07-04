@@ -12,10 +12,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images') no-repeat center center fixed;
+            background-color: #f0f0f0;
+            background-image: url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images');
             background-size: cover;
-            transition: background-color 0.5s, color 0.5s; /* 添加过渡效果 */
-            position: relative;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .dark-mode {
+            background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩 */
         }
         .title {
             font-size: 3em;
@@ -39,7 +43,10 @@
             padding: 20px;
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
+            background-color: rgba(255, 255, 255, 0.8); /* 保证编辑框可读性 */
+            z-index: 2; /* 使编辑框在遮罩之上 */
         }
+        /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
         @media screen and (max-width: 768px) {
             .container {
                 flex-direction: column; /* 垂直排列 */
@@ -53,49 +60,15 @@
                 margin-right: 20px; /* 与右边隔开20px，根据需要调整距离 */
             }
         }
-        /* 夜间模式遮罩 */
-        .dark-mode-overlay {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩 */
-            pointer-events: none; /* 使遮罩不影响鼠标事件 */
-            transition: opacity 0.5s; /* 添加过渡效果 */
-            opacity: 0;
-        }
-        .dark-mode .dark-mode-overlay {
-            opacity: 1;
+        /* 夜间模式下的样式 */
+        .dark-mode .title,
+        .dark-mode .right-box {
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
-    <script>
-        function applyDarkMode(isDarkMode) {
-            var body = document.body;
-            var title = document.querySelector('.title');
-            var overlay = document.querySelector('.dark-mode-overlay');
-            if (isDarkMode) {
-                body.classList.add('dark-mode');
-                title.style.color = '#fff';
-            } else {
-                body.classList.remove('dark-mode');
-                title.style.color = '#333';
-            }
-        }
-
-        window.addEventListener('load', function() {
-            var darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            applyDarkMode(darkModeMediaQuery.matches); // 应用当前模式
-
-            darkModeMediaQuery.addEventListener('change', function(event) {
-                applyDarkMode(event.matches); // 当系统颜色模式变化时，应用新的模式
-            });
-        });
-    </script>
 </head>
 <body>
-    <div class="dark-mode-overlay"></div>
     <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
     <div class="container">
         <div class="right-box">
@@ -106,6 +79,7 @@
                 <input type="submit" value="save">
             </form>
             <button onclick="toggleLanguage()">Switch Language</button>
+            <button id="switch-dark-mode" onclick="toggleDarkMode()">Switch Dark Mode</button>
             <div class="form-container" style="display: flex; align-items: center;">
                 <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
                     <select name="template_index">
@@ -116,8 +90,29 @@
                     <input type="submit" value="Select and Generate">
                 </form>
             </div>
-            <button onclick="toggleBackgroundColor()">Switch Dark Mode</button>
         </div>
     </div>
+    <script>
+        function applyDarkMode(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // 检测系统夜间模式
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkModeMediaQuery.addListener((e) => {
+            applyDarkMode(e.matches);
+        });
+
+        // 初始化时根据系统设置应用夜间模式
+        applyDarkMode(darkModeMediaQuery.matches);
+    </script>
 </body>
 </html>

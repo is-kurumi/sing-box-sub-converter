@@ -96,8 +96,8 @@
                 <br>
                 <input type="submit" value="Save">
             </form>
-            <div class="form-container" style="display: flex; align-items: center;">
-                <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
+            <div class="form-container" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <form method="POST" action="/generate_config" style="display: flex; flex-direction: column; align-items: flex-start;">
                     <label for="template_index">Select Template:</label>
                     <select id="template_index" name="template_index">
                         {% for option in template_options %}

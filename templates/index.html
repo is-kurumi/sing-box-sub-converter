@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/Toperlock/sing-box-subscribe@main/public/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="sing-box 订阅转换">
     <title>生成sing-box配置</title>
@@ -46,27 +45,19 @@
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
             background-color: rgba(255, 255, 255, 0.8); /* 保证编辑框可读性 */
+            border-radius: 10px; /* 编辑框圆角 */
+            backdrop-filter: blur(10px); /* 高斯模糊背景 */
             z-index: 2; /* 使编辑框在遮罩之上 */
         }
-        /* 夜间模式下的样式 */
-        .dark-mode .overlay {
-            background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩 */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+        textarea {
+            border-radius: 10px; /* 圆角 */
+            border: 1px solid #ccc; /* 边框样式 */
+            padding: 10px; /* 内边距 */
+            width: 100%; /* 宽度调整为100% */
+            box-sizing: border-box; /* 让padding不影响宽度 */
+            background-color: rgba(255, 255, 255, 0.9); /* 编辑框背景色 */
         }
-        .dark-mode .title,
-        .dark-mode .right-box {
-            color: #fff;
-        }
-        button {
-            padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
-            margin: 5px; /* 增加按钮的间距 */
-        }
-        input[type="submit"] {
+        button, input[type="submit"] {
             padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
             margin: 5px; /* 增加按钮的间距 */
         }
@@ -76,19 +67,15 @@
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
     <div class="container">
         <div class="right-box">
             <h1>Edit TEMP_JSON_DATA</h1>
             <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
             <form id="temp-json-form" method="POST" action="/edit_temp_json">
-                <label for="temp-json-data">JSON Data:</label>
                 <textarea id="temp-json-data" name="temp_json_data" rows="10" cols="40">{{ temp_json_data | default('') }}</textarea>
                 <br>
                 <input type="submit" value="Save">
             </form>
-            <button onclick="toggleLanguage()">Switch Language</button>
-            <button id="switch-dark-mode" onclick="toggleDarkMode()">Switch Dark Mode</button>
             <div class="form-container" style="display: flex; align-items: center;">
                 <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
                     <label for="template_index">Select Template:</label>
@@ -125,12 +112,12 @@
         // 初始化时设置背景和布局
         function initialize() {
             if (detectMobile()) {
-                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/Mobile.webp')";
+                document.body.style.backgroundImage = "url('https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images&method=mobile')";
                 document.querySelector('.container').style.flexDirection = 'column';
                 document.querySelector('.right-box').style.width = '100%';
                 document.querySelector('.title').style.textAlign = 'center'; // 居中对齐
             } else {
-                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/PC.webp')";
+                document.body.style.backgroundImage = "url('http://api.btstu.cn/sjbz/api.php?lx=dongman&format=images')";
             }
         }
 
